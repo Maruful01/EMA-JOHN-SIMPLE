@@ -1,14 +1,16 @@
 import React from 'react';
 
+
 const Cart = (props) => {
     const cart = props.cart;
-    console.log(cart)
     //const total = cart.reduce((total, prd) => total + prd.price , 0)
     let total = 0;
     for (let i =0; i < cart.length; i++) {
         const product = cart[i];
-        total = total + product.price;
-        console.log ("price: "+product.price)
+        const quantity = product.quantity;
+        console.log ("quantity", quantity)
+        total = total + product.price * quantity;
+      
     }
     const vat = Math.round(total / 10);
     let shipping = 0;
@@ -29,6 +31,10 @@ const Cart = (props) => {
             <p>Shipping cost: {shipping}</p>
             <p>Total Vat: {vat}</p>
             <p>Total price: {Math.round(total + vat + shipping)} </p>
+            {
+                props.children
+            }
+            
         </div>
     );
 };
